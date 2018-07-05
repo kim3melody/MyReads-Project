@@ -3,18 +3,23 @@ import PropTypes from 'prop-types'
 import Book from './Book'
 
 class BookShelf extends React.Component {
+
+    /**
+    * @description Call back function for passing book shelf change info
+    * @param {object} book - book object
+    * @param {string} bookStatus - book.shelf
+    */
     onChange = (book, bookStatus) => {
         this.props.onChange(book, bookStatus);
     };
 
     render() {
-      //console.log(this.props);
         const { books } = this.props;
-        //list for creating reusable blocks and matching book.shelf attribute
+        //manually configured shelf name and corresponding book attribute values
         const shelves = [
-            ["currentlyReading", "Currently Reading"],
-            ["wantToRead", "Want to Read"],
-            ["read", "Read"],
+        ["currentlyReading", "Currently Reading"],
+        ["wantToRead", "Want to Read"],
+        ["read", "Read"],
         ];
         
         return(
@@ -26,16 +31,15 @@ class BookShelf extends React.Component {
                             <ol className="books-grid">
                                 {books.filter(book => book.shelf === shelf[0]).map((book, index) => (
                                     <li key={index}>
-                                        <Book book={book} onChange={this.onChange} />
+                                    <Book book={book} onChange={this.onChange} />
                                     </li>
                                 ))}
                             </ol>
                         </div>
                     </div>
                 ))}
-
             </div>
-        );
+            );
     }
 }
 
